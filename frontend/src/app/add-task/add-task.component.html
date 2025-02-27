@@ -1,0 +1,107 @@
+<div class="container mt-md-5 d-flex flex-column align-items-center">
+  <div class="spinner-border" role="status" *ngIf="isLoading">
+    <span class="visually-hidden d-flex">Loading...</span>
+  </div>
+  <div
+    [ngClass]="[
+      'd-flex',
+      'flex-row',
+      'align-items-center',
+      'justify-content-between',
+      'w-100',
+      isSuccess ? 'alert alert-success' : 'alert alert-danger'
+    ]"
+    role="alert"
+    *ngIf="isError || isSuccess"
+  >
+    {{ message }}
+    <i class="fa-solid fa-xmark close-btn" (click)="closeAlert()"></i>
+  </div>
+  <div *ngIf="!isLoading">
+    <h1 class="mb-3 d-flex justify-content-center">Add Your Task</h1>
+    <form
+      [formGroup]="addTaskForm"
+      (ngSubmit)="onSubmit()"
+      class="flex-grow-1 w-100"
+    >
+      <mat-form-field class="w-100">
+        <mat-label>Title</mat-label>
+        <input
+          matInput
+          placeholder="My Task 01"
+          formControlName="title"
+          type="text"
+          required
+        />
+        <mat-error *ngIf="addTaskForm.controls.title.hasError('required')"
+          >Title is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Choose a date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="datepicker"
+          formControlName="taskDate"
+          required
+          placeholder="MM/DD/YYYY"
+          [min]="startDate"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="datepicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #datepicker [startAt]="startDate"></mat-datepicker>
+        <mat-error *ngIf="addTaskForm.controls.taskDate.hasError('required')"
+          >Date is required</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field class="w-100 mt-2">
+        <mat-label>Pick a time</mat-label>
+        <input
+          matInput
+          [matTimepicker]="timepicker"
+          formControlName="taskTime"
+          required
+        />
+        <mat-timepicker-toggle matIconSuffix [for]="timepicker" />
+        <mat-timepicker #timepicker />
+        <mat-error *ngIf="addTaskForm.controls.taskTime.hasError('required')"
+          >Time is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Description</mat-label>
+        <input
+          matInput
+          placeholder="This is an example task."
+          formControlName="description"
+          type="text"
+          required
+        />
+        <mat-error *ngIf="addTaskForm.controls.description.hasError('required')"
+          >Description is required</mat-error
+        >
+      </mat-form-field>
+      <div class="d-flex align-items-center justify-content-start mt-2">
+        <button
+          class="btn btn-success"
+          type="submit"
+          [disabled]="addTaskForm.invalid || addTaskForm.untouched"
+          *ngIf="!taskId"
+        >
+          Submit
+        </button>
+        <button
+          class="btn btn-success"
+          type="submit"
+          [disabled]="addTaskForm.invalid || addTaskForm.untouched"
+          *ngIf="taskId"
+        >
+          Update
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

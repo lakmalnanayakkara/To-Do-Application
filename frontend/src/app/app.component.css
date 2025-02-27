@@ -1,0 +1,26 @@
+.nav-start-btn {
+  background: transparent;
+  border-radius: 5px;
+  color: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.site-container {
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.active-nav {
+  left: 0px;
+}
+
+.active-link {
+  border-bottom: 2px solid #fff;
+}
