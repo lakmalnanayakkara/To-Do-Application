@@ -1,4 +1,4 @@
-1. Prerequisites
+# Prerequisites
 ---Install Docker
 ---Install Git
 
