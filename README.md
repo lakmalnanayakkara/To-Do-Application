@@ -13,4 +13,4 @@
 
 # Test API endpoints
 6. http://localhost:8081/api/v1/task/get-tasks
-   You can see a not found task response.
+   You can see a not found tasks response.
