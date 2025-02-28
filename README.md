@@ -9,6 +9,8 @@
 
 # Open browser to 
 4. http://localhost
+5. Got to add task and add a task.
 
 # Test API endpoints
-5. http://localhost:8081/api/v1/task/get-tasks
+6. http://localhost:8081/api/v1/task/get-tasks
+   You can see a not found task response.
