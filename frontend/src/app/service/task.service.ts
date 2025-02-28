@@ -19,7 +19,7 @@ export interface TaskDetails {
   providedIn: 'root',
 })
 export class TaskService {
-  private apiUrl = '/api';
+  private apiUrl = 'http://localhost:8081/api/v1/task';
   constructor(private http: HttpClient) {}
 
   addTask(taskDetails: TaskDetails): Observable<any> {

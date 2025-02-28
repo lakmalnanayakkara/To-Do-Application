@@ -40,14 +40,17 @@ describe('TaskService', () => {
 
   describe('addTask', () => {
     it('should send POST request to correct endpoint', () => {
-      const mockResponse = { code: 201, message: 'Created', data: {} };
+      const mockResponse = { code: 201, message: 'SUCCESS', data: {} };
       httpClient.post.mockReturnValue(of(mockResponse));
 
       service.addTask(mockTask).subscribe((response) => {
         expect(response).toEqual(mockResponse);
       });
 
-      expect(httpClient.post).toHaveBeenCalledWith('/api/add-task', mockTask);
+      expect(httpClient.post).toHaveBeenCalledWith(
+        'http://localhost:8081/api/v1/task/add-task',
+        mockTask
+      );
     });
 
     it('should handle add task errors', () => {
@@ -62,14 +65,16 @@ describe('TaskService', () => {
 
   describe('getTasks', () => {
     it('should send GET request to correct endpoint', () => {
-      const mockResponse = { code: 200, message: 'OK', data: [mockTask] };
+      const mockResponse = { code: 200, message: 'SUCCESS', data: [mockTask] };
       httpClient.get.mockReturnValue(of(mockResponse));
 
       service.getTasks().subscribe((response) => {
         expect(response).toEqual(mockResponse);
       });
 
-      expect(httpClient.get).toHaveBeenCalledWith('/api/get-tasks');
+      expect(httpClient.get).toHaveBeenCalledWith(
+        'http://localhost:8081/api/v1/task/get-tasks'
+      );
     });
 
     it('should handle get tasks errors', () => {
@@ -85,7 +90,7 @@ describe('TaskService', () => {
   describe('deleteTask', () => {
     it('should send DELETE request with correct ID', () => {
       const taskId = 123;
-      const mockResponse = { code: 200, message: 'Deleted', data: {} };
+      const mockResponse = { code: 200, message: 'SUCCESS', data: {} };
       httpClient.delete.mockReturnValue(of(mockResponse));
 
       service.deleteTask(taskId).subscribe((response) => {
@@ -93,7 +98,7 @@ describe('TaskService', () => {
       });
 
       expect(httpClient.delete).toHaveBeenCalledWith(
-        `/api/delete-task?id=${taskId}`
+        `http://localhost:8081/api/v1/task/delete-task?id=${taskId}`
       );
     });
 
@@ -111,7 +116,7 @@ describe('TaskService', () => {
   describe('updateTask', () => {
     it('should send PUT request with correct ID and data', () => {
       const taskId = 123;
-      const mockResponse = { code: 200, message: 'Updated', data: {} };
+      const mockResponse = { code: 200, message: 'SUCCESS', data: {} };
       httpClient.put.mockReturnValue(of(mockResponse));
 
       service.updateTask(taskId, mockTask).subscribe((response) => {
@@ -119,7 +124,7 @@ describe('TaskService', () => {
       });
 
       expect(httpClient.put).toHaveBeenCalledWith(
-        `/api/update-task?id=${taskId}`,
+        `http://localhost:8081/api/v1/task/update-task?id=${taskId}`,
         mockTask
       );
     });
@@ -138,14 +143,16 @@ describe('TaskService', () => {
   describe('getTask', () => {
     it('should send GET request with correct ID', () => {
       const taskId = 123;
-      const mockResponse = { code: 200, message: 'OK', data: mockTask };
+      const mockResponse = { code: 200, message: 'SUCCESS', data: mockTask };
       httpClient.get.mockReturnValue(of(mockResponse));
 
       service.getTask(taskId).subscribe((response) => {
         expect(response).toEqual(mockResponse);
       });
 
-      expect(httpClient.get).toHaveBeenCalledWith(`/api/get-task?id=${taskId}`);
+      expect(httpClient.get).toHaveBeenCalledWith(
+        `http://localhost:8081/api/v1/task/get-task?id=${taskId}`
+      );
     });
 
     it('should handle get task errors', () => {
